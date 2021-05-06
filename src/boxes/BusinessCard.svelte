@@ -59,8 +59,9 @@
                 <p>{title}</p>
                 <p>{education}</p>
             </div>
+            <button id="edit">Edit</button>
         </div>
-        <div class="inner">
+        <div id="second" class="inner">
             <div id="headline">
             {#if headline === null}
                 <button>Set headline</button>
@@ -104,8 +105,18 @@
     .inner {
         display: flex;
         margin: 0.5rem;
+        position: relative;
+    }
+    #second {
+        justify-content: space-between;
     }
     #status {
         min-width: 40%;
+    }
+    #edit {
+        min-width: 10%;
+        height: 2rem;
+        position: absolute;
+        right: 0rem;
     }
 </style>
