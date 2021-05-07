@@ -3,6 +3,10 @@
 	import Box from './boxes/Box.svelte';
 	import References from './boxes/References.svelte';
 	import Goals from './boxes/Goals.svelte';
+    import AddressBook from './screens/AddressBook.svelte';
+    //import { fade } from 'svelte/transition';
+	import Modal from 'svelte-simple-modal';
+	
 </script>
 
 <main>
@@ -16,7 +20,9 @@
 				headline="I code to solve problems and beautify digital environments."
 				status={3}
 			/>
-			<References/>
+			<Modal>
+				<References/>
+			</Modal>
 		</div>
 		<div id="right-boxes">
 			<div id="right-row-1">
