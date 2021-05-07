@@ -32,7 +32,7 @@
         padding: 1rem;
         text-align: center;
         display: flex;
-        height: 25vh;
+        height: 20vh;
         justify-content: center;
         align-items: center;
     }
