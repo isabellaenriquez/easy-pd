@@ -1,42 +1,48 @@
 <script lang="ts">
-	import BusinessCard from './boxes/BusinessCard.svelte';
-	import Box from './boxes/Box.svelte';
-	import References from './boxes/References.svelte';
-	import Goals from './boxes/Goals.svelte';
-    import AddressBook from './screens/AddressBook.svelte';
     //import { fade } from 'svelte/transition';
-	import Modal from 'svelte-simple-modal';
+	import Template1 from './screens/Template1.svelte';
+	import Home from './screens/Home.svelte';
+
+	let openEducation: boolean = false;
+	let openExp: boolean = false;
+	let openProjects: boolean = false;
+	let openNotes: boolean = false;
+	let openRefBook: boolean = false;
+	let openGoals: boolean = false;
 	
+	function openHome(){
+		if (openEducation){
+			openEducation = false;
+		}else if (openExp){
+			openExp = false;
+		}else if (openProjects){
+			openProjects = false;
+		}else if (openNotes){
+			openNotes = false;
+		}else if (openRefBook){
+			openRefBook = false;
+		}else if (openGoals){
+			openGoals = false;
+		}
+	}
 </script>
 
 <main>
-	<h1>easyPD</h1>
-	<div id="boxes">
-		<div id="left-boxes">
-			<BusinessCard 
-				name="Isabella Enriquez" title="Frontend Developer"
-				src="https://media-exp1.licdn.com/dms/image/C5603AQHcMyh8xk8pXA/profile-displayphoto-shrink_800_800/0/1606009294022?e=1625702400&v=beta&t=IIiczs8SZcUt5iwtRgi0TDa6TpxCgQGerIiytX7qLrY"
-				education="BCmpH, Queen's University '23"
-				headline="I code to solve problems and beautify digital environments."
-				status={3}
-			/>
-			<Modal>
-				<References/>
-			</Modal>
-		</div>
-		<div id="right-boxes">
-			<div id="right-row-1">
-				<Box name="education"/>
-				<Box name="experience"/>
-			</div>
-			<div id="right-row-2">
-				<Box name="projects"/>
-				<Box name="notes"/>
-			</div>
-			<Goals/>
-		</div>
-
-	</div>
+	{#if openEducation}
+		<Template1 pageTitle="education" on:home={openHome}/>
+	{:else if openExp}
+		<Template1 pageTitle="experience" on:home={openHome}/>
+	{:else if openProjects}
+		<Template1 pageTitle="projects" addUnit="project" on:home={openHome}/>
+	{:else if openNotes}
+		<Template1 pageTitle="notes" addUnit="note" on:home={openHome}/>
+	{:else if openRefBook}
+		<Template1 pageTitle="references" addUnit="reference" on:home={openHome}/>
+	{:else if openGoals}
+		<Template1 pageTitle="goals" addUnit="goal" on:home={openHome}/>
+	{:else}
+		<Home bind:openEducation={openEducation} bind:openExp={openExp} bind:openProjects={openProjects} bind:openNotes={openNotes}/>
+	{/if}
 </main>
 
 <style>
@@ -46,28 +52,4 @@
 		padding: 2.5rem;
 	}
 
-	h1 {
-		color: white;
-		padding: 0 1rem 2.5rem;
-		margin: 0;
-		font-size: 3rem;
-	}
-
-	#boxes {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	#right-row-1 {
-		display: grid;
-		grid-template-columns: 40% 60%;
-	}
-	#right-row-2 {
-		display: grid;
-		grid-template-columns: 60% 40%;
-		grid-auto-rows: 1fr;
-	}
-
-	@media (min-width: 640px) {
-	}
 </style>
