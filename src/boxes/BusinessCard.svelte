@@ -41,7 +41,7 @@
         let infoDiv = document.getElementById("info");
         let infoHeight = infoDiv.clientHeight;
         let headshotHeight = infoHeight + (infoHeight/4);
-        console.log(infoHeight);
+        console.log("info height: " + infoHeight);
         headshot.style.height = headshotHeight + "px";
     }
 </script>
