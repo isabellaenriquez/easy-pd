@@ -14,12 +14,7 @@ body {
 }
 
 a {
-	color: rgb(0,100,200);
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
+	color: rgb(153, 204, 255);
 }
 
 a:visited {
@@ -49,7 +44,7 @@ button {
 	color: white;
 	background-color: #9686A3;
 	outline: none;
-	min-width: 30%;
+	padding: 0.5rem 2.5rem;
 	border-radius: 0.5rem;
 	border-style: none;
 	transition: 1s;
