@@ -3,7 +3,16 @@
 	import Box from '../boxes/Box.svelte';
 	import Goals from '../boxes/Goals.svelte';
     import { fade, fly } from 'svelte/transition';
-	import Modal from 'svelte-simple-modal';
+	//import Modal from 'svelte-simple-modal';
+
+	// process data
+	export let data: any;;
+	let name: string = data.firstName + " " + data.lastName;
+	let educationLine: string = "No education found"
+	let latestEducation: any = data.education[0];
+	if (latestEducation !== undefined){
+		educationLine = latestEducation.degree.shortForm + ", " + latestEducation.school;
+	}
 
     // variables for opening different dashboards
     export let openEducation: boolean;
@@ -14,16 +23,16 @@
 	
 </script>
 
-<main in:fly="{{ y: 2000, duration: 2000 }}" out:fade="{{ duration: 500 }}">
+<main in:fly="{{ y: 2000, duration: 3000 }}" out:fade="{{ duration: 500 }}">
 	<h1>easyPD</h1>
 	<div id="boxes">
 		<div id="left-boxes">
 			<BusinessCard 
-				name="Isabella Enriquez" title="Frontend Developer"
+				name={name} title={data.position}
 				src="https://media-exp1.licdn.com/dms/image/C5603AQHcMyh8xk8pXA/profile-displayphoto-shrink_800_800/0/1606009294022?e=1625702400&v=beta&t=IIiczs8SZcUt5iwtRgi0TDa6TpxCgQGerIiytX7qLrY"
-				education="BCmpH, Queen's University '23"
-				headline="I code to solve problems and beautify digital environments."
-				status={3}
+				education={educationLine}
+				headline={data.headline}
+				status={data.statusNum}
 			/>
 			<Box name="references" bind:isOpen={openRefBook}/>
 			<!--Modal>

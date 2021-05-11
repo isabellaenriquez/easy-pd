@@ -56,6 +56,26 @@
         }
 
         sortedContacts = [...sortedContacts, newContact];
+        sortContactsByKey(); // resort
+
+        // save to json
+        let newData = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "title": title,
+            "relation": relation,
+            "email": email,
+            "phone": phone,
+            "dateAdded": date
+        } 
+
+        fetch('http://127.0.0.1:8000/add/references', {
+            method: 'POST', 
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(newData)
+        }).then(res => console.log(res))
 
     }
 
@@ -93,7 +113,7 @@
         <label for="phone">Phone</label>
         <input name="phone" id="phone" type="number" placeholder="1234567899...">
     </form>
-    <button on:click={addContact}>Add</button>
+    <button type="submit" on:click={addContact}>Add</button>
     {/if}
     {#each sortedContacts as contact}
         <Contact info={contact}/>
