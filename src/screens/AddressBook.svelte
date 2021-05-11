@@ -64,7 +64,6 @@
 </script>
 
 <div>
-    <h1>reference address book</h1>
     <label for="sortMethod">Sort by:</label>
     <select name="sortMethod" id="sortSelect" bind:value={sortMethod} on:blur="{sortContactsByKey}">
         <option value="firstName">First name</option>
@@ -97,14 +96,9 @@
     <button on:click={addContact}>Add</button>
     {/if}
     {#each sortedContacts as contact}
-        <hr>
         <Contact info={contact}/>
     {/each}
 </div>
 
 <style>
-    div {
-        background-color: #525972;
-        color: white;
-    }
 </style>

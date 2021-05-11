@@ -32,9 +32,9 @@
     .outer-box {
         background-color: #525972;
         border-radius: 1rem;
-        margin: 1rem 1rem 0 0;
+        margin: 0.5rem;
         padding: 1rem;
-        height: 20vh;
+        min-height: 20vh;
         text-align: center;
         display: flex;
         justify-content: center;
@@ -50,6 +50,9 @@
     h2 {
         margin: 0 0.5rem;
     }
+    #references-box {
+        flex-direction: column;
+    }
     #education-box {
         flex-direction: column;
     }
@@ -62,14 +65,12 @@
     #notes-box {
         flex-direction: column-reverse;
     }
-    #experience-img, #projects-img { /**consider making this stylesheet sass so i dont have to do this*/
-        height: 80%;
+    img {
+        margin: 0.5rem;
+        width: 30%;
     }
-    #education-img {
-        width: 40%;
-    }
-    #notes-img {
-        width: 70%;
+    #references-img, #notes-img {
+        width: 80%;
     }
     button {
         margin: 0.5rem;

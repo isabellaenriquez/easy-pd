@@ -1,16 +1,16 @@
 <script lang="ts">
 	import BusinessCard from '../boxes/BusinessCard.svelte';
 	import Box from '../boxes/Box.svelte';
-	import References from '../boxes/References.svelte';
 	import Goals from '../boxes/Goals.svelte';
     import { fade, fly } from 'svelte/transition';
 	import Modal from 'svelte-simple-modal';
 
     // variables for opening different dashboards
-    export let openEducation;
-    export let openExp;
-    export let openProjects;
-    export let openNotes;
+    export let openEducation: boolean;
+    export let openExp: boolean;
+    export let openProjects: boolean;
+    export let openNotes: boolean;
+	export let openRefBook: boolean;
 	
 </script>
 
@@ -25,9 +25,10 @@
 				headline="I code to solve problems and beautify digital environments."
 				status={3}
 			/>
-			<Modal>
+			<Box name="references" bind:isOpen={openRefBook}/>
+			<!--Modal>
 				<References/>
-			</Modal>
+			</Modal-->
 		</div>
 		<div id="right-boxes">
 			<div id="right-row-1">

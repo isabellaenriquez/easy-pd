@@ -28,9 +28,7 @@
 		email: "tinabeana@wharfmail.com",
 		phone: 34567,
 		dateAdded: new Date()
-    }
-
-    ]
+    }];
 
     const handlePageOpen = () => {
         console.log('opening references');
