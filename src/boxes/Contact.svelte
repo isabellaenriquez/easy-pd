@@ -13,8 +13,11 @@
 </script>
 
 <div class="contact-card">
-    <h2>{info.firstName} {info.lastName}</h2>
-    <h4>{info.title} || {info.relation}</h4>
+    <div class="contact-header">
+        <h2>{info.firstName} {info.lastName} </h2>
+        <p> — {info.title}</p>
+    </div>
+    <p>Relationship: {info.relation}</p>
     <h3>Contact information</h3>
     <a href="mailto:{info.email}">{info.email}</a>
     <p>{info.phone}</p>
@@ -29,7 +32,27 @@
         font-style: italic;
         font-size: small;
     }
-    h4 {
-        font-style: italic;
+
+    .contact-card {
+        background-color: #525972;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin: 1rem 0;
+    }
+
+    .contact-header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: baseline;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    p {
+        margin: 0.5rem 0;
     }
 </style>
