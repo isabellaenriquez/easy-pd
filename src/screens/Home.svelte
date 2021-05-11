@@ -9,7 +9,7 @@
     export let openEducation: boolean;
     export let openExp: boolean;
     export let openProjects: boolean;
-    export let openNotes: boolean;
+    export let openApps: boolean;
 	export let openRefBook: boolean;
 	
 </script>
@@ -37,7 +37,7 @@
 			</div>
 			<div id="right-row-2">
 				<Box name="projects" bind:isOpen={openProjects}/>
-				<Box name="notes" bind:isOpen={openNotes}/>
+				<Box name="applications" bind:isOpen={openApps}/>
 			</div>
 			<Goals/>
 		</div>

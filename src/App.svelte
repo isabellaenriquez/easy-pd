@@ -7,7 +7,7 @@ import AddressBook from './screens/AddressBook.svelte';
 	let openEducation: boolean = false;
 	let openExp: boolean = false;
 	let openProjects: boolean = false;
-	let openNotes: boolean = false;
+	let openApps: boolean = false;
 	let openRefBook: boolean = false;
 	let openGoals: boolean = false;
 	
@@ -18,8 +18,8 @@ import AddressBook from './screens/AddressBook.svelte';
 			openExp = false;
 		}else if (openProjects){
 			openProjects = false;
-		}else if (openNotes){
-			openNotes = false;
+		}else if (openApps){
+			openApps = false;
 		}else if (openRefBook){
 			openRefBook = false;
 		}else if (openGoals){
@@ -62,8 +62,8 @@ import AddressBook from './screens/AddressBook.svelte';
 		<Template1 pageTitle="experience" on:home={openHome}/>
 	{:else if openProjects}
 		<Template1 pageTitle="projects" on:home={openHome}/>
-	{:else if openNotes}
-		<Template1 pageTitle="notes" on:home={openHome}/>
+	{:else if openApps}
+		<Template1 pageTitle="applications" on:home={openHome}/>
 	{:else if openRefBook}
 		<Template1 pageTitle="references" on:home={openHome}>
 			<AddressBook contacts={tempContacts}/>
@@ -71,7 +71,7 @@ import AddressBook from './screens/AddressBook.svelte';
 	{:else if openGoals}
 		<Template1 pageTitle="goals" on:home={openHome}/>
 	{:else}
-		<Home bind:openEducation={openEducation} bind:openExp={openExp} bind:openProjects={openProjects} bind:openNotes={openNotes} bind:openRefBook={openRefBook}/>
+		<Home bind:openEducation={openEducation} bind:openExp={openExp} bind:openProjects={openProjects} bind:openApps={openApps} bind:openRefBook={openRefBook}/>
 	{/if}
 </main>
 

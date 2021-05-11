@@ -62,14 +62,14 @@
     #projects-box {
         flex-direction: row-reverse;
     }
-    #notes-box {
+    #applications-box {
         flex-direction: column-reverse;
     }
     img {
         margin: 0.5rem;
         width: 30%;
     }
-    #references-img, #notes-img {
+    #references-img, #applications-img {
         width: 80%;
     }
     button {
