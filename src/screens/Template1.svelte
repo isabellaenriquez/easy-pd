@@ -16,7 +16,7 @@
     }
 </script>
 
-<main in:fly={{ y: 2000, duration: 2000 }} out:fade={{ duration: 500 }}>
+<main in:fly={{ y: 2000, duration: 3000 }} out:fade="{{ duration: 500 }}">
     <div class="header">
         <h1>{pageTitle}</h1>
         <button on:click={goHome}><i class="fas fa-home"></i></button>
