@@ -32,7 +32,7 @@
 	let loaded: boolean = false;
 
 	onMount(async() =>{
-		const res = await fetch('http://127.0.0.1:8000/data');
+		const res = await fetch('./data');
 		data = await res.json();
 		loaded = true;
 	});

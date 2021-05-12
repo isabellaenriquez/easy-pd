@@ -26,10 +26,15 @@
         });
     }
 
+    // capitalize a word
+    function capitalize(aString: string): string {
+        return aString.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+    }
+
     function addContact() {
         formVisible = false; // close form
-        let firstName: string = (<HTMLInputElement>document.getElementById("firstName")).value;
-        let lastName: string = (<HTMLInputElement>document.getElementById("lastName")).value;
+        let firstName: string = capitalize((<HTMLInputElement>document.getElementById("firstName")).value);
+        let lastName: string = capitalize((<HTMLInputElement>document.getElementById("lastName")).value);
         let date: Date = new Date();
         const newContact: contactInfo = {
             firstName: firstName,
@@ -69,7 +74,7 @@
             "dateAdded": date
         } 
 
-        fetch('http://127.0.0.1:8000/add/references', {
+        fetch('./add/references', {
             method: 'POST', 
             headers: new Headers({
                 'Content-Type': 'application/json'

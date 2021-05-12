@@ -7,7 +7,6 @@ CORS(app, support_credentials=True)
 
 @app.route("/")
 def base():
-    print('hello')
     return send_from_directory('public', 'index.html')
 
 @app.route('/<path:path>')
@@ -32,9 +31,9 @@ def add_info(addType):
     with open('data.json', 'w') as f:
         json.dump(data_dict, f)
     print(f"adding to {addType}")
-    print('successfully saved info!') # idk is this valid; if not, just redirect to /
+    print('successfully saved info!') 
     return jsonify(request.json)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=8000)
+    app.run(debug=True)
 
