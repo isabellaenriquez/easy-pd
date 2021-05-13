@@ -11,6 +11,7 @@ Style guide for this project (for non-globally styled elements)
 - Font face: Cabin
 - Main title: h1
 - Box title: h2
+- Subtitle: h3
 - Other text: p
 
 ## Margins
@@ -24,3 +25,4 @@ Style guide for this project (for non-globally styled elements)
 
 ### Boxes
 - 1rem
+- border radius: 1rem
