@@ -16,6 +16,7 @@ def static_files(path):
 @app.route("/data") # api :)))
 @cross_origin(supports_credentials=True)
 def get_data():
+    # TODO: add check to see if json exists
     with open('data.json') as f:
         data = json.load(f)
     print('retrieved data')
@@ -27,7 +28,8 @@ def get_data():
 def add_info(addType):
     with open('data.json') as f:
         data_dict = json.load(f)
-    data_dict[addType].append(request.json)
+    data_dict[addType].append(request.json) 
+    
     with open('data.json', 'w') as f:
         json.dump(data_dict, f)
     print(f"adding to {addType}")

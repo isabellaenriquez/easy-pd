@@ -35,9 +35,7 @@
 
 	onMount(async() =>{
 		const res = await fetch('./data');
-		data = await res.json();
-
-		
+		data = await res.json();	
 		loaded = true;
 	});
 
