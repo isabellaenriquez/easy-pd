@@ -1,15 +1,15 @@
 <script lang="ts">
     export let name: string;
-    export let title: string = null;
-    export let alt: string = null; // alt text for icon
+    export let title: string = "";
+    export let alt: string = ""; // alt text for icon
     export let src: string = "images/" + name + ".svg"; // path to icon
     export let isOpen: boolean = false;
 
-    if (title === null){
+    if (title === null || title === ""){
         title = name;
     }
 
-    if (src !== null && alt === null){
+    if ((src !== null || src !== "") && (alt === null || alt === "")){
         alt = "An icon representing the " + name + " category."; // default alt text if none set
     }
 

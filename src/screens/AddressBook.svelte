@@ -10,7 +10,6 @@
         relation?: string,
         email?: string,
         phone?: number,
-        notes?: string,
         dateAdded: Date
     }
 
@@ -21,7 +20,7 @@
     // sort by specified sort method
     function sortContactsByKey() {
         console.log('resorting');
-        sortedContacts = sortedContacts.sort(function(a: {}, b: {}) {
+        sortedContacts = sortedContacts.sort(function(a: contactInfo | any, b: contactInfo | any): number { // perhaps this is dangerous (the "any")
             return (a[sortMethod] < b[sortMethod] ? -1: 1)
         });
     }
@@ -64,7 +63,7 @@
         sortContactsByKey(); // resort
 
         // save to json
-        let newData = {
+        let newData = { // change this to be of type contactInfo?
             "firstName": firstName,
             "lastName": lastName,
             "title": title,
@@ -117,13 +116,22 @@
         <input name="email" id="email" type="email" placeholder="123@fakemail.com...">
         <label for="phone">Phone</label>
         <input name="phone" id="phone" type="number" placeholder="1234567899...">
+        <button type="submit" on:click={addContact}>Add</button>
     </form>
-    <button type="submit" on:click={addContact}>Add</button>
     {/if}
-    {#each sortedContacts as contact}
-        <Contact info={contact}/>
-    {/each}
+    <div id="contacts">
+        {#each sortedContacts as contact}
+            <Contact info={contact}/>
+        {:else}
+            <p>No contacts found.</p>
+        {/each}
+    </div>
 </div>
 
 <style>
+    #contacts {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1rem;
+    }
 </style>

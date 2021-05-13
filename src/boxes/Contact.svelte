@@ -6,7 +6,6 @@
         relation?: string,
         email?: string,
         phone?: number,
-        notes?: string,
         dateAdded: Date
     }
 
@@ -20,10 +19,9 @@
     <p>Relationship: {info.relation}</p>
     <h3>Contact information</h3>
     <a href="mailto:{info.email}">{info.email}</a>
-    <p>{info.phone}</p>
-    <h3>Notes</h3>
-    <p>{info.notes}</p>
-    <p class="date-added">{info.dateAdded}</p>
+    <p>Phone: {info.phone}</p>
+    <p class="date-added">Added: {info.dateAdded}</p>
+    <button>delete</button>
 </div>
 
 <style>
@@ -37,7 +35,7 @@
         background-color: #525972;
         padding: 1rem;
         border-radius: 1rem;
-        margin: 1rem 0;
+        margin: 0.5rem 0;
     }
 
     .contact-header {
@@ -48,7 +46,7 @@
         padding: 0;
     }
 
-    h2 {
+    h2, h3 {
         margin: 0;
     }
 
