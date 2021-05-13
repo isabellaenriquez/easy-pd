@@ -3,6 +3,8 @@
 	import Template1 from "./screens/Template1.svelte";
 	import Home from "./screens/Home.svelte";
 	import AddressBook from "./screens/AddressBook.svelte";
+	import Education from "./screens/Education.svelte";
+
 	import { onMount } from 'svelte';
 
 	let openEducation: boolean = false;
@@ -29,11 +31,13 @@
 	}
 
 	let data: any = {};
-	let loaded: boolean = false;
+	let loaded: boolean = false; // whether or not data has been fetched
 
 	onMount(async() =>{
 		const res = await fetch('./data');
 		data = await res.json();
+
+		
 		loaded = true;
 	});
 
@@ -42,7 +46,9 @@
 <main>
 	{#if loaded}
 		{#if openEducation}
-			<Template1 pageTitle="education" on:home={openHome} />
+			<Template1 pageTitle="education" on:home={openHome}>
+				<Education educationData={data.education}/>
+			</Template1>
 		{:else if openExp}
 			<Template1 pageTitle="experience" on:home={openHome} />
 		{:else if openProjects}
@@ -73,6 +79,6 @@
 	main {
 		background-color: #333643;
 		min-height: 100vh;
-		padding: 2.5rem;
+		padding: 2.5rem 5rem;
 	}
 </style>
