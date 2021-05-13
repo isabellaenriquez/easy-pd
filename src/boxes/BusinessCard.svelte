@@ -2,12 +2,12 @@
     export let name: string;
     export let title: string;
     export let education: string;
-    export let alt: string = null; // alt text for icon
-    export let src: string = null; // link to pic
+    export let alt: string = ""; // alt text for icon
+    export let src: string = ""; // link to pic
     export let status: number;
-    export let headline: string = null;
+    export let headline: string = "";
 
-    if (src !== null && alt === null) {
+    if (src !== "" && alt === "") {
         alt = "A picture of " + name + "."; // default alt text if none set
     }
 
@@ -37,8 +37,16 @@
 
     function resizeHeadshot() {
         let headshot = document.getElementById("headshot");
+        if (headshot === null){
+            console.log('no headshot');
+            return;
+        }
         headshot.style.height = "0";
         let infoDiv = document.getElementById("info");
+        if (infoDiv === null){
+            console.log('couldn\'t find infoDiv');
+            return;
+        }
         let infoHeight = infoDiv.clientHeight;
         let headshotHeight = infoHeight + infoHeight / 4;
         console.log("info height: " + infoHeight);

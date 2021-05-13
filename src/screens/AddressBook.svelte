@@ -30,16 +30,29 @@
         return aString.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
     }
 
+    function isEmail(emailInput: string): boolean {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // will not work for emails that don't have dots or that have spaces
+        return re.test(emailInput.toLowerCase());
+    }
+
     function addContact() {
-        formVisible = false; // close form
         let firstName: string = capitalize((<HTMLInputElement>document.getElementById("firstName")).value);
+        if (firstName === undefined || firstName === null || firstName === ''){
+            alert("Please fill in a first name!");
+            return;
+        }
         let lastName: string = capitalize((<HTMLInputElement>document.getElementById("lastName")).value);
+        if (lastName === undefined || lastName === null || lastName === ''){
+            alert("Please fill in a last name!");
+            return;
+        }
         let date: Date = new Date();
         const newContact: contactInfo = {
             firstName: firstName,
             lastName: lastName,
             dateAdded: date
         };
+        
 
         let title: string = (<HTMLInputElement>document.getElementById("title")).value;
         if (title !== null && title !== undefined) {
@@ -52,7 +65,12 @@
 
         let email: string = (<HTMLInputElement>document.getElementById("email")).value;
         if (email !== null && email !== undefined) {
-            newContact.email = email;
+            if (isEmail(email))
+                newContact.email = email;
+            else {
+                alert("Please enter a valid email!");
+                return;
+            }
         }
         let phone: number = parseInt((<HTMLInputElement>document.getElementById("phone")).value);
         if (phone !== null && phone !== undefined){
@@ -62,24 +80,15 @@
         sortedContacts = [...sortedContacts, newContact];
         sortContactsByKey(); // resort
 
-        // save to json
-        let newData = { // change this to be of type contactInfo?
-            "firstName": firstName,
-            "lastName": lastName,
-            "title": title,
-            "relation": relation,
-            "email": email,
-            "phone": phone,
-            "dateAdded": date
-        } 
-
         fetch('./add/references', {
             method: 'POST', 
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
-            body: JSON.stringify(newData)
-        }).then(res => console.log(res))
+            body: JSON.stringify(newContact)
+        }).then(res => console.log(res));
+
+        formVisible = false; // close form
 
     }
 
@@ -96,9 +105,9 @@
     </select>
     <button name="addReference" on:click="{() => formVisible = !formVisible}">
         {#if formVisible}
-            Cancel
+            cancel
         {:else}
-            Add new reference
+            add new reference
         {/if}
     </button>
     {#if formVisible}
@@ -116,7 +125,7 @@
         <input name="email" id="email" type="email" placeholder="123@fakemail.com...">
         <label for="phone">Phone</label>
         <input name="phone" id="phone" type="number" placeholder="1234567899...">
-        <button type="submit" on:click={addContact}>Add</button>
+        <button type="submit" on:click={addContact}>add</button>
     </form>
     {/if}
     <div id="contacts">

@@ -2,5 +2,15 @@
   "extends": "@tsconfig/svelte/tsconfig.json",
 
   "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
+  "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
+
+  "compilerOptions": {
+    "noEmit": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
 }

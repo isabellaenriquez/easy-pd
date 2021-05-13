@@ -17,11 +17,14 @@
         <p> — {info.title}</p>
     </div>
     <p>Relationship: {info.relation}</p>
-    <h3>Contact information</h3>
-    <a href="mailto:{info.email}">{info.email}</a>
-    <p>Phone: {info.phone}</p>
+    {#if info.email !== "" || info.phone !== null}
+        <h3>Contact information</h3>
+        <a href="mailto:{info.email}">{info.email}</a>
+        {#if info.phone !== NaN && info.phone !== null}
+            <p>Phone: {info.phone}</p>
+        {/if}
+    {/if}
     <p class="date-added">Added: {info.dateAdded}</p>
-    <button>delete</button>
 </div>
 
 <style>
