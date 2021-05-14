@@ -14,7 +14,6 @@ def static_files(path):
     return send_from_directory('public', path)
 
 @app.route("/data") # api :)))
-@cross_origin(supports_credentials=True)
 def get_data():
     # TODO: add check to see if json exists
     with open('data.json') as f:
@@ -24,7 +23,6 @@ def get_data():
 
 
 @app.route('/add/<addType>', methods=['POST'])
-@cross_origin(supports_credentials=True)
 def add_info(addType):
     with open('data.json') as f:
         data_dict = json.load(f)
