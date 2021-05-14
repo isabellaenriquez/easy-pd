@@ -1,5 +1,6 @@
 <script lang="ts">
     import Contact from '../boxes/Contact.svelte';
+    import { capitalize, isUndefined } from '../globalFunctions';
 
     export let contacts: contactInfo[];
 
@@ -25,11 +26,6 @@
         });
     }
 
-    // capitalize a word
-    function capitalize(aString: string): string {
-        return aString.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
-    }
-
     function isEmail(emailInput: string): boolean {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // will not work for emails that don't have dots or that have spaces
         return re.test(emailInput.toLowerCase());
@@ -37,15 +33,16 @@
 
     function addContact() {
         let firstName: string = capitalize((<HTMLInputElement>document.getElementById("firstName")).value);
-        if (firstName === undefined || firstName === null || firstName === ''){
+        if (isUndefined(firstName)){
             alert("Please fill in a first name!");
             return;
         }
         let lastName: string = capitalize((<HTMLInputElement>document.getElementById("lastName")).value);
-        if (lastName === undefined || lastName === null || lastName === ''){
+        if (isUndefined(lastName)){
             alert("Please fill in a last name!");
             return;
         }
+
         let date: Date = new Date();
         const newContact: contactInfo = {
             firstName: firstName,
@@ -55,16 +52,16 @@
         
 
         let title: string = (<HTMLInputElement>document.getElementById("title")).value;
-        if (title !== null && title !== undefined) {
+        if (!isUndefined(title)) {
             newContact.title = title
         }
         let relation: string =  (<HTMLInputElement>document.getElementById("relation")).value;
-        if (relation !== null && relation !== undefined) {
+        if (!isUndefined(relation)) {
             newContact.relation = relation;
         }
 
         let email: string = (<HTMLInputElement>document.getElementById("email")).value;
-        if (email !== null && email !== undefined) {
+        if (!isUndefined(email)) {
             if (isEmail(email))
                 newContact.email = email;
             else {
@@ -73,7 +70,7 @@
             }
         }
         let phone: number = parseInt((<HTMLInputElement>document.getElementById("phone")).value);
-        if (phone !== null && phone !== undefined){
+        if (!isUndefined(phone)){
             newContact.phone = phone;
         }
 

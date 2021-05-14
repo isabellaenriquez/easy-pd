@@ -5,11 +5,15 @@
     export let src: string = "images/" + name + ".svg"; // path to icon
     export let isOpen: boolean = false;
 
-    if (title === null || title === ""){
+    import { isUndefined } from '../globalFunctions';
+
+
+    if (isUndefined(title)){
         title = name;
     }
 
-    if ((src !== null || src !== "") && (alt === null || alt === "")){
+    // there's an image src but no alt text set
+    if ((!isUndefined(src)) && (isUndefined(alt))){
         alt = "An icon representing the " + name + " category."; // default alt text if none set
     }
 

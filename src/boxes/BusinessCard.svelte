@@ -6,9 +6,11 @@
     export let src: string = ""; // link to pic
     export let status: number;
     export let headline: string = "";
+    import { isUndefined } from '../globalFunctions';
 
-    if (src !== "" && alt === "") {
-        alt = "A picture of " + name + "."; // default alt text if none set
+    // image src is defined but no alt text
+    if (!isUndefined(src) && isUndefined(alt)) {
+        alt = "A picture of " + name + "."; // default alt text
     }
 
     let colour: string;

@@ -3,6 +3,7 @@
 	import Box from '../boxes/Box.svelte';
 	import Goals from '../boxes/Goals.svelte';
     import { fade, fly } from 'svelte/transition';
+	import { isUndefined } from '../globalFunctions';
 	//import Modal from 'svelte-simple-modal';
 
 	// process data
@@ -10,8 +11,14 @@
 	let name: string = data.firstName + " " + data.lastName;
 	let educationLine: string = "No education found"
 	let latestEducation: any = data.education[0];
-	if (latestEducation !== undefined){
-		educationLine = latestEducation.degree.shortForm + ", " + latestEducation.school;
+	console.log(typeof latestEducation)
+	if (!isUndefined(latestEducation)){
+		if (!isUndefined(latestEducation.degree.shortForm)){
+			educationLine = latestEducation.degree.shortForm + ", ";
+		}else {
+			educationLine = "";
+		}
+		educationLine += latestEducation.school;
 	}
 
     // variables for opening different dashboards

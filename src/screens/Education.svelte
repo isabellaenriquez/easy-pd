@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { capitalize, isUndefined } from '../globalFunctions';
     export let educationData: educationElement[];
 
     type educationElement = {
@@ -13,22 +14,6 @@
         courses?: string[];
         clubs?: string[][];
     };
-
-    // capitalize a word
-    function capitalize(aString: string): string {
-        return aString.replace(/\w\S*/g, (w) =>
-            w.replace(/^\w/, (c) => c.toUpperCase())
-        );
-    }
-
-    function isUndefined(v: any): boolean { // add type checks
-        if ((typeof v) === "string"){
-            return ((v === undefined) || v === null || v === "");
-        }else {
-            // number
-            return (isNaN(v) || v === undefined || v === null || v === "");
-        }
-    }
 
     function addEducation() {
         let school: string = capitalize(
