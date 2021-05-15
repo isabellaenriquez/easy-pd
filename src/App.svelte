@@ -6,6 +6,7 @@
 	import Education from "./screens/Education.svelte";
 
 	import { onMount } from 'svelte';
+import Experience from "./screens/Experience.svelte";
 
 	let openEducation: boolean = false;
 	let openExp: boolean = false;
@@ -48,7 +49,9 @@
 				<Education educationData={data.education}/>
 			</Template1>
 		{:else if openExp}
-			<Template1 pageTitle="experience" on:home={openHome} />
+			<Template1 pageTitle="experience" on:home={openHome}>
+				<Experience expData={data.experience}/>
+			</Template1>
 		{:else if openProjects}
 			<Template1 pageTitle="projects" on:home={openHome} />
 		{:else if openApps}

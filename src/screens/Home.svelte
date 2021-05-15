@@ -4,6 +4,7 @@
 	import Goals from '../boxes/Goals.svelte';
     import { fade, fly } from 'svelte/transition';
 	import { isUndefined } from '../globalFunctions';
+	import Socials from '../boxes/Socials.svelte';
 	//import Modal from 'svelte-simple-modal';
 
 	// process data
@@ -42,9 +43,7 @@
 				status={data.statusNum}
 			/>
 			<Box name="references" bind:isOpen={openRefBook}/>
-			<!--Modal>
-				<References/>
-			</Modal-->
+			<Socials socialData={data.socials}/>
 		</div>
 		<div id="right-boxes">
 			<div id="right-row-1">
