@@ -83,8 +83,11 @@
         }
         newEducation.clubs = clubs;
 
-        educationData = [...educationData, newEducation]; // update DOM
-
+        if (isUndefined(educationData)){
+            educationData = [newEducation];
+        }else {
+            educationData = [...educationData, newEducation]; // update DOM
+        }
         fetch('./add/education', {
             method: 'POST',
             headers: new Headers({
@@ -153,57 +156,59 @@
             <button type="button" on:click={addEducation}>finish</button>
         </form>
     {/if}
-
-    {#each educationData as e}
-        <div class="education-info">
-            <h2>
-                {e.school}
-            </h2>
-            {#if e.degree}
-                <p>
-                    <i>
-                        {e.degree.name}
-                        {#if e.degree.shortForm && e.degree.shortForm !== ""}
-                            — {e.degree.shortForm}
+    
+    {#if educationData}
+        {#each educationData as e}
+            <div class="education-info">
+                <h2>
+                    {e.school}
+                </h2>
+                {#if e.degree}
+                    <p>
+                        <i>
+                            {e.degree.name}
+                            {#if e.degree.shortForm && e.degree.shortForm !== ""}
+                                — {e.degree.shortForm}
+                            {/if}
+                        </i>
+                        •
+                        {e.startYear} - {e.finalYear}
+                    </p>
+                {/if}
+                {#if e.cgpa}
+                    CGPA: {e.cgpa}
+                {/if}
+            </div>
+            <div class="education-extra">
+                <div class="courses">
+                    <h3>Coursework</h3>
+                    <ul>
+                        {#if e.courses}
+                            {#each e.courses as c}
+                                <li>{c}</li>
+                            {:else}
+                                <li>No courses listed.</li>
+                            {/each}
                         {/if}
-                    </i>
-                    •
-                    {e.startYear} - {e.finalYear}
-                </p>
-            {/if}
-            {#if e.cgpa}
-                CGPA: {e.cgpa}
-            {/if}
-        </div>
-        <div class="education-extra">
-            <div class="courses">
-                <h3>Coursework</h3>
-                <ul>
-                    {#if e.courses}
-                        {#each e.courses as c}
-                            <li>{c}</li>
-                        {:else}
-                            <li>No courses listed.</li>
-                        {/each}
-                    {/if}
-                </ul>
+                    </ul>
+                </div>
+                <div class="clubs">
+                    <h3>Extra-curricular activities</h3>
+                    <ul>
+                        {#if e.clubs}
+                            {#each e.clubs as c}
+                                <li>{c[1]} @ {c[0]}</li>
+                            {:else}
+                                <li>No clubs listed.</li>
+                            {/each}
+                        {/if}
+                    </ul>
+                </div>
             </div>
-            <div class="clubs">
-                <h3>Extra-curricular activities</h3>
-                <ul>
-                    {#if e.clubs}
-                        {#each e.clubs as c}
-                            <li>{c[1]} @ {c[0]}</li>
-                        {:else}
-                            <li>No clubs listed.</li>
-                        {/each}
-                    {/if}
-                </ul>
-            </div>
-        </div>
+        {/each}
     {:else}
         <p>No education listed.</p>
-    {/each}
+    {/if}
 </div>
 
 <style>

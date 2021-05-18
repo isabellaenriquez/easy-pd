@@ -54,7 +54,11 @@
             newExp.notes = notes;
         }
 
-        expData = [...expData, newExp]; // update DOM
+        if (isUndefined(expData)) {
+            expData = [newExp];
+        } else {
+            expData = [...expData, newExp]; // update DOM
+        }
 
         fetch('./add/experience', {
             method: 'POST',
@@ -112,27 +116,29 @@
     {/if}
 
     <div id="experiences">
-        {#each expData as e}
-            <div class="exp-info">
-                <h2>
-                    {e.org}
-                </h2>
-                <p>
-                    {e.position} • {e.startYear} — 
-                    {#if e.finalYear}
-                        {e.finalYear}
-                    {:else}
-                        Present
+        {#if expData}
+            {#each expData as e}
+                <div class="exp-info">
+                    <h2>
+                        {e.org}
+                    </h2>
+                    <p>
+                        {e.position} • {e.startYear} — 
+                        {#if e.finalYear}
+                            {e.finalYear}
+                        {:else}
+                            Present
+                        {/if}
+                    </p>
+                    {#if e.notes}
+                        <h4>Notes</h4>
+                        <p>{e.notes}</p>
                     {/if}
-                </p>
-                {#if e.notes}
-                    <h4>Notes</h4>
-                    <p>{e.notes}</p>
-                {/if}
-            </div>
+                </div>
+            {/each}
         {:else}
-            <p>No experience listed.</p>
-        {/each}
+        <p>No experience listed.</p>
+        {/if}
     </div>
 </div>
 

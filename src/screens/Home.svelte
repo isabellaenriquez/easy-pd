@@ -1,62 +1,61 @@
 <script lang="ts">
-	import BusinessCard from '../boxes/BusinessCard.svelte';
-	import Box from '../boxes/Box.svelte';
-	import Goals from '../boxes/Goals.svelte';
-    import { fade, fly } from 'svelte/transition';
-	import { isUndefined } from '../globalFunctions';
-	import Socials from '../boxes/Socials.svelte';
-	//import Modal from 'svelte-simple-modal';
+	import BusinessCard from "../boxes/BusinessCard.svelte";
+	import Box from "../boxes/Box.svelte";
+	import Goals from "../boxes/Goals.svelte";
+	import { fade, fly } from "svelte/transition";
+	import { isUndefined } from "../globalFunctions";
+	import Socials from "../boxes/Socials.svelte";
 
 	// process data
-	export let data: any;;
+	export let data: any;
 	let name: string = data.firstName + " " + data.lastName;
-	let educationLine: string = "No education found"
-	let latestEducation: any = data.education[0];
-	console.log(typeof latestEducation)
-	if (!isUndefined(latestEducation)){
-		if (!isUndefined(latestEducation.degree.shortForm)){
-			educationLine = latestEducation.degree.shortForm + ", ";
-		}else {
-			educationLine = "";
+	let educationLine: string = "No education found";
+	if (data.education) {
+		let latestEducation: any = data.education[0];
+		if (!isUndefined(latestEducation)) {
+			if (!isUndefined(latestEducation.degree.shortForm)) {
+				educationLine = latestEducation.degree.shortForm + ", ";
+			} else {
+				educationLine = "";
+			}
+			educationLine += latestEducation.school;
 		}
-		educationLine += latestEducation.school;
 	}
 
-    // variables for opening different dashboards
-    export let openEducation: boolean;
-    export let openExp: boolean;
-    export let openProjects: boolean;
-    export let openApps: boolean;
+	// variables for opening different dashboards
+	export let openEducation: boolean;
+	export let openExp: boolean;
+	export let openProjects: boolean;
+	export let openApps: boolean;
 	export let openRefBook: boolean;
-	
 </script>
 
-<main in:fly="{{ y: 2000, duration: 3000 }}" out:fade="{{ duration: 500 }}">
+<main in:fly={{ y: 2000, duration: 3000 }} out:fade={{ duration: 500 }}>
 	<h1>easyPD</h1>
 	<div id="boxes">
 		<div id="left-boxes">
-			<BusinessCard 
-				name={name} title={data.position}
+			<BusinessCard
+				{name}
+				title={data.position}
 				src="https://media-exp1.licdn.com/dms/image/C5603AQHcMyh8xk8pXA/profile-displayphoto-shrink_800_800/0/1606009294022?e=1625702400&v=beta&t=IIiczs8SZcUt5iwtRgi0TDa6TpxCgQGerIiytX7qLrY"
 				education={educationLine}
 				headline={data.headline}
 				status={data.statusNum}
 			/>
-			<Box name="references" bind:isOpen={openRefBook}/>
-			<Socials socialData={data.socials}/>
+			<Box name="references" bind:isOpen={openRefBook} />
+			<Socials socialData={data.socials} />
 		</div>
 		<div id="right-boxes">
 			<div id="right-row-1">
-				<Box name="education" bind:isOpen={openEducation}/>
-				<Box name="experience" bind:isOpen={openExp}/>
+				<Box name="education" bind:isOpen={openEducation} />
+				<Box name="experience" bind:isOpen={openExp} />
 			</div>
 			<div id="right-row-2">
-				<Box name="projects" bind:isOpen={openProjects}/>
-				<Box name="applications" bind:isOpen={openApps}/>
+				<Box name="projects" bind:isOpen={openProjects} />
+				<Box name="applications" bind:isOpen={openApps} />
 			</div>
-			<Goals/>
+			<Goals />
 		</div>
-
 	</div>
 </main>
 

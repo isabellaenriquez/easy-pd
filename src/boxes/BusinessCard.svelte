@@ -26,11 +26,11 @@
             break;
         case 3:
             colour = "red";
-            statusString = "Happily employed";
+            statusString = "Not looking for work";
             break;
         case 4:
-            colour = "grey";
-            statusString = "Unemployed and happy";
+            colour = "lightgrey";
+            statusString = "Student";
             break;
     }
 

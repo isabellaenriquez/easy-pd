@@ -1,12 +1,12 @@
 <script lang="ts">
-	//import { fade } from 'svelte/transition';
 	import Template1 from "./screens/Template1.svelte";
 	import Home from "./screens/Home.svelte";
 	import AddressBook from "./screens/AddressBook.svelte";
 	import Education from "./screens/Education.svelte";
-
 	import { onMount } from 'svelte';
-import Experience from "./screens/Experience.svelte";
+	import { isUndefined } from './globalFunctions';
+	import Experience from "./screens/Experience.svelte";
+	import CreateProfile from './screens/CreateProfile.svelte';
 
 	let openEducation: boolean = false;
 	let openExp: boolean = false;
@@ -33,11 +33,18 @@ import Experience from "./screens/Experience.svelte";
 
 	let data: any = {};
 	let loaded: boolean = false; // whether or not data has been fetched
+	let showCreate: boolean = false;
 
 	onMount(async() =>{
 		const res = await fetch('./data');
-		data = await res.json();	
-		loaded = true;
+		data = await res.json();
+		
+		if (isUndefined(data)){
+			// TODO: create profile
+			showCreate = true;
+		}else {
+			loaded = true;
+		}
 	});
 
 </script>
@@ -71,8 +78,10 @@ import Experience from "./screens/Experience.svelte";
 				bind:openRefBook
 			/>
 		{/if}
+	{:else if showCreate}
+		<CreateProfile on:profileCreated={() => showCreate = false} />
 	{:else}
-		<p>Loading...</p>
+		<p>Loading...</p> <!--make this prettier-->
 	{/if}
 </main>
 

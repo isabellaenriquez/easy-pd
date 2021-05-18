@@ -1,6 +1,6 @@
 <script lang="ts">
     import Contact from '../boxes/Contact.svelte';
-    import { capitalize, isUndefined } from '../globalFunctions';
+    import { capitalize, isUndefined, isEmail } from '../globalFunctions';
 
     export let contacts: contactInfo[];
 
@@ -24,11 +24,6 @@
         sortedContacts = sortedContacts.sort(function(a: contactInfo | any, b: contactInfo | any): number { // perhaps this is dangerous (the "any")
             return (a[sortMethod] < b[sortMethod] ? -1: 1)
         });
-    }
-
-    function isEmail(emailInput: string): boolean {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // will not work for emails that don't have dots or that have spaces
-        return re.test(emailInput.toLowerCase());
     }
 
     function addContact() {
@@ -74,8 +69,12 @@
             newContact.phone = phone;
         }
 
-        sortedContacts = [...sortedContacts, newContact];
-        sortContactsByKey(); // resort
+        if (isUndefined(sortedContacts)){
+            sortedContacts = [newContact];
+        }else {
+            sortedContacts = [...sortedContacts, newContact];
+            sortContactsByKey(); // resort
+        }
 
         fetch('./add/references', {
             method: 'POST', 
@@ -122,15 +121,17 @@
         <input name="email" id="email" type="email" placeholder="123@fakemail.com...">
         <label for="phone">Phone</label>
         <input name="phone" id="phone" type="number" placeholder="1234567899...">
-        <button type="submit" on:click={addContact}>add</button>
+        <button type="button" on:click={addContact}>add</button>
     </form>
     {/if}
     <div id="contacts">
-        {#each sortedContacts as contact}
-            <Contact info={contact}/>
+        {#if sortedContacts}
+            {#each sortedContacts as contact}
+                <Contact info={contact}/>
+            {/each}
         {:else}
             <p>No contacts found.</p>
-        {/each}
+        {/if}
     </div>
 </div>
 
