@@ -5,6 +5,7 @@
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
 
   "compilerOptions": {
+    "types": ["jest"],
     "noEmit": true,
     "strictNullChecks": true,
     "strict": true,
