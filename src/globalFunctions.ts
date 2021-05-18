@@ -28,3 +28,17 @@ export function isUndefined(v: any): boolean {
     }
     return false;
 }
+
+export function isValidUrl(input: string): boolean  {
+    let url: URL;
+
+    try {
+        url = new URL(input);
+    } catch (e) {
+        return false; // couldn't make valid url
+    }
+
+    let splitUrl: string[] = input.split('.');
+
+    return (splitUrl.length > 1) && (url.protocol === 'http:' || url.protocol === 'https:'); // only want url's with these schemes 
+}

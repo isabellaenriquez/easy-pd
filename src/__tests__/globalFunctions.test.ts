@@ -1,4 +1,4 @@
-import { capitalize, isEmail, isUndefined } from '../globalFunctions';
+import { capitalize, isEmail, isUndefined, isValidUrl } from '../globalFunctions';
 
 // TODO: write tests for isEmail
 
@@ -116,4 +116,29 @@ test('several periods', () => {
 
 test('nothing before @', () => {
     expect(isEmail('@mail.ru')).toEqual(false);
+});
+
+// isValidUrl
+test('basic valid case 1 (http)', () => {
+    expect(isValidUrl('http://google.com')).toEqual(true);
+});
+
+test('basic valid case 2 (https)', () => {
+    expect(isValidUrl('https://google.com')).toEqual(true);
+});
+
+test('domain but no scheme', () => {
+    expect(isValidUrl('google.com')).toEqual(false);
+});
+
+test('scheme but no domain', () => {
+    expect(isValidUrl('https://google')).toEqual(false);
+});
+
+test('non .com domain', () => {
+    expect(isValidUrl('http://vk.ru')).toEqual(true);
+});
+
+test('no scheme nor domain', () => {
+    expect(isValidUrl('yahoo')).toEqual(false);
 });
