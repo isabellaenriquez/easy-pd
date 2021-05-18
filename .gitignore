@@ -3,5 +3,8 @@
 
 .DS_Store
 notes.md
+
 data.json
-test.ts
+testData?.json
+
+__pycache__
