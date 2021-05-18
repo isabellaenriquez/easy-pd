@@ -5,16 +5,26 @@ export function capitalize(aString: string): string {
     );
 }
 
+/** checks if given string is in email format */
+export function isEmail(emailInput: string): boolean {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // will not work for emails that don't have dots or that have spaces
+    return re.test(emailInput.toLowerCase());
+}
+
 /** checks if the input is undefined depending on its type */
 export function isUndefined(v: any): boolean {
-    if ((typeof v) === "string"){
-        return ((v === undefined) || v === null || v === "");
-    } else if ((typeof v) === "object") {
-        return ((v === undefined) || v === null || v === {});
-    } else if ((typeof v) === "number") {
-        return (isNaN(v) || v === undefined || v === null || v === "");
+    if (v == null && !(typeof v === 'number' && v === 0)) { // checks for null and undefined
+        return true;
     } else {
-        console.log("the type " + (typeof v) + " has not been logged yet");
-        return true
+        if (typeof v === 'string') {
+            return (v === "");
+        } else if (typeof v === 'number') {
+            return (isNaN(v));
+        } else if (Array.isArray(v)) {
+            return (v.length === 0);
+        } else if (typeof v === 'object') {
+            return (Object.keys(v).length === 0);
+        } 
     }
+    return false;
 }
