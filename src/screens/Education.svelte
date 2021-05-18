@@ -1,5 +1,6 @@
 <script lang="ts">
     import { capitalize, isUndefined } from '../globalFunctions';
+	import { slide } from 'svelte/transition';
     export let educationData: educationElement[];
 
     type educationElement = {
@@ -97,6 +98,10 @@
         }).then(res => console.log(res));
 
         formVisible = false; // close form
+
+        //reset values
+        numCourses = 0;
+        numClubs = 0;
     }
 
     let formVisible: boolean = false;
@@ -113,7 +118,7 @@
         {/if}
     </button>
     {#if formVisible}
-        <form>
+        <form transition:slide|local>
             <h2>new education</h2>
             <label for="school">School name</label>
             <input

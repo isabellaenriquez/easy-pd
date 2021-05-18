@@ -1,6 +1,7 @@
 <script lang="ts">
     import Contact from '../boxes/Contact.svelte';
     import { capitalize, isUndefined, isEmail } from '../globalFunctions';
+	import { slide } from 'svelte/transition';
 
     export let contacts: contactInfo[];
 
@@ -107,7 +108,7 @@
         {/if}
     </button>
     {#if formVisible}
-    <form>
+    <form transition:slide|local>
         <h2>new reference</h2>
         <label for="firstName">First name</label>
         <input name="firstName" id="firstName" placeholder="Isabella..." required>

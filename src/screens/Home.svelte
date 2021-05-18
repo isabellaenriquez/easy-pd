@@ -2,7 +2,7 @@
 	import BusinessCard from "../boxes/BusinessCard.svelte";
 	import Box from "../boxes/Box.svelte";
 	import Goals from "../boxes/Goals.svelte";
-	import { fade, fly } from "svelte/transition";
+	import { fade } from "svelte/transition";
 	import { isUndefined } from "../globalFunctions";
 	import Socials from "../boxes/Socials.svelte";
 
@@ -30,7 +30,7 @@
 	export let openRefBook: boolean;
 </script>
 
-<main in:fly={{ y: 2000, duration: 3000 }} out:fade={{ duration: 500 }}>
+<main in:fade={{ duration: 500, delay: 750 }} out:fade={{ duration: 500 }}>
 	<h1>easyPD</h1>
 	<div id="boxes">
 		<div id="left-boxes">

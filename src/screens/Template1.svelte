@@ -3,7 +3,7 @@
     // template for education, experience, projects
 
     import { createEventDispatcher } from "svelte";
-    import { fade, fly } from "svelte/transition";
+    import { fade } from "svelte/transition";
 
     export let pageTitle: string;
 
@@ -16,7 +16,7 @@
     }
 </script>
 
-<main in:fly={{ y: 2000, duration: 3000 }} out:fade="{{ duration: 500 }}">
+<main in:fade={{ duration: 500, delay: 750 }} out:fade="{{ duration: 500 }}">
     <div class="header">
         <h1>{pageTitle}</h1>
         <button on:click={goHome}><i class="fas fa-home"></i></button>
